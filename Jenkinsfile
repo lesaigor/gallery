@@ -43,16 +43,7 @@ pipeline {
 
 
     }
-    post {
-        success {
-            // Send a notification on successful build and deployment
-            echo 'deployment completed successfully!'
-        }
-        failure {
-            // Send a notification on failed build or deployment
-            echo 'Error deploying to Render failed!'
-        }
-    }
+    
     post {
         always {
             echo 'slack notification'
