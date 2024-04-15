@@ -1,3 +1,8 @@
+def COLOR_MAP = [
+    'FAILURE': 'danger',
+    'SUCCESS': 'good'
+]
+
 pipeline {
     agent any
     tools {
@@ -46,6 +51,16 @@ pipeline {
         failure {
             // Send a notification on failed build or deployment
             echo 'Error deploying to Render failed!'
+        }
+    }
+    post {
+        always {
+            echo 'slack notification'
+            slackSend (
+                channel: '#pride_ip1',
+                color: COLOR_MAP [currentBuild.currentResult],
+                message: '*$ {currentBuild.currentResult}:* Job${env.JOB_NAME} \n build $ {env.BUILD_NUMBER } \n More infor at: $(env.BUILD_URL)'
+            )
         }
     }
 }
