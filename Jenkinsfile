@@ -15,13 +15,28 @@ pipeline {
                 sh 'npm install'
             }
         }
-        
+
+        stage("Test") {
+            steps {
+                sh 'npm test'
+            }
+        }
+  
         stage("Start Server") {
             steps {
                 // Start the server using 'node server.js' command
                 sh 'node server.js &'
             }
         }
+
+        stage("deploy") {
+            steps {
+                // Start the server using 'node server.js' command
+                sh 'npm build'
+            }
+        }
+
+
     }
     post {
         success {
