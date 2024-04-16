@@ -45,13 +45,14 @@ pipeline {
     }
     
     post {
-        always {
-            echo 'slack notification'
-            slackSend (
-                channel: '#pride_ip1',
-                color: COLOR_MAP [currentBuild.currentResult],
-                message: '*$ {currentBuild.currentResult}:* Job${env.JOB_NAME} \n build $ {env.BUILD_NUMBER } \n More infor at: $(env.BUILD_URL)'
-            )
-        }
+    always {
+        echo 'slack notification'
+        slackSend (
+            channel: '#pride_ip1',
+            color: COLOR_MAP[currentBuild.currentResult],
+            message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME}\nbuild ${env.BUILD_NUMBER}\nMore info at: ${env.BUILD_URL}"
+        )
     }
+}
+
 }
