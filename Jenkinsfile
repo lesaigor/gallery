@@ -5,6 +5,10 @@ def COLOR_MAP = [
 
 pipeline {
     agent any
+    environment {
+        // Set the render URL as the BUILD_URL
+        BUILD_URL = 'https://pride-5po5.onrender.com'
+    }
     tools {
         // Use the NodeJS tool label
         nodejs 'npm'
